@@ -1,0 +1,24 @@
+{
+	"name": "csprite-web",
+	"version": "0.0.1",
+	"description": "website for https://github.com/pegvin/csprite",
+	"main": "RenderMarkdown.js",
+	"scripts": {
+		"test": "node ./RenderMarkdown.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/csprite/wiki.git"
+	},
+	"author": "Aditya Mishra",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/csprite/wiki/issues"
+	},
+	"homepage": "https://github.com/csprite/wiki#readme",
+	"dependencies": {
+		"gray-matter": "^4.0.3",
+		"highlight.js": "^11.7.0",
+		"marked": "^4.2.5"
+	}
+}
