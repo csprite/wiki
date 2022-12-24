@@ -1,4 +1,4 @@
-# https://csprite.github.io/wiki
+# [csprite.github.io/wiki](https://csprite.github.io/wiki)
 wiki for my pixel art editor, uses a custom script [`RenderMarkdown.js`](./RenderMarkdown.js) instead of jekyll as versioning in jekyll is painful
 
 ---
