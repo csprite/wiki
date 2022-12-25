@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="https://csprite.github.io/assets/favicon.png" />
+	<title>Building from source - csprite</title>
+	<link rel="stylesheet" type="text/css" href="https://csprite.github.io/assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="https://csprite.github.io/assets/css/simple.css">
+	<link rel="stylesheet" type="text/css" href="https://csprite.github.io/assets/css/post.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/windows-10.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/github.min.css"-->
+	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css"-->
+	<script src="https://csprite.github.io/assets/js/scale.fix.js"></script>
+</head>
+<body>
+
+<div id="MainContainer"><h1 id="building-from-source">Building from source</h1>
+<p><strong>Note</strong>: Since i hadn&#39;t documented how to the build csprite v0.1.x, i&#39;ve documented it now on the basis of how it was built on github actions using the <code>.github/workflows/ci.yml</code> file.</p>
+<h3 id="quick-links">Quick links:</h3>
+<ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#macos">macOS</a></li>
+</ul>
+<h2 id="windows">Windows</h2>
+<ol>
+<li>install <a href="https://www.msys2.org/">msys2</a></li>
+<li>install required dependencies in msys2 mingw64 shell:</li>
+</ol>
+<pre><code class="hljs language-bash">pacman -S mingw-w64-x86_64-clang mingw-w64-x86_64-glfw mingw-w64-x86_64-python mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-pillow scons make git
+</code></pre>
+<p><strong>Note</strong>: If you want to build for x32 bit system replace the <code>x86_64</code> from above packages with <code>i686</code></p>
+<ol start="3">
+<li>Get the source code: <code>git clone https://github.com/pegvin/csprite --recursive -b v0.1.0</code></li>
+<li>Generate required assets: <code>python3 tools/create_icons.py &amp;&amp; python3 tools/create_assets.py</code></li>
+<li>Build the source:<ul>
+<li>Debug: <code>make all CC=clang</code></li>
+<li>Release: <code>make release CC=clang</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="linux">Linux</h2>
+<ol>
+<li><p>Install dependencies</p>
+<ul>
+<li>Debian:<ul>
+<li><code>apt install libglfw3 libglfw3-dev git scons</code></li>
+<li><code>python3 -m pip install --upgrade Pillow</code></li>
+<li><code>python3 -m pip install --upgrade numpy</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Get the source code: <code>git clone https://github.com/pegvin/csprite --recursive -b v0.1.0</code></p>
+</li>
+<li><p>Generate required assets: <code>python3 tools/create_icons.py &amp;&amp; python3 tools/create_assets.py</code></p>
+</li>
+<li><p>Build the source:</p>
+<ul>
+<li>Debug: <code>make all</code></li>
+<li>Release: <code>make release</code></li>
+</ul>
+</li>
+</ol>
+<h1 id="macos">macOS</h1>
+<ol>
+<li>Install deps with homebrew &amp; pip: <code>brew install scons dylibbundler glfw &amp;&amp; python3 -m pip install --upgrade Pillow &amp;&amp; python3 -m pip install --upgrade numpy</code></li>
+<li>Get the source code: <code>git clone https://github.com/pegvin/csprite --recursive</code></li>
+<li>Generate required assets: <code>python3 tools/create_icons.py &amp;&amp; python3 tools/create_assets.py</code></li>
+<li>Build The Source:<ul>
+<li>Debug: <code>make all</code></li>
+<li>Release: <code>make release</code></li>
+</ul>
+</li>
+</ol>
+</div>
+<footer>
+	<nav>
+		<a style="display: inline-block; text-align: justify;" href="/">Home</a> |
+		<a style="display: inline-block; text-align: justify;" href="/blog/">Blog</a> |
+		<a style="display: inline-block; text-align: justify;" href="/wiki/">Wiki</a> |
+		<a style="display: inline-block; text-align: justify;" href="https://github.com/pegvin/csprite">GitHub</a>
+	</nav>
+</footer>
+
+</body>
+</html>

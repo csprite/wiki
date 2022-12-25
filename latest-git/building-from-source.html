@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="https://csprite.github.io/assets/favicon.png" />
+	<title>Building from source - csprite</title>
+	<link rel="stylesheet" type="text/css" href="https://csprite.github.io/assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="https://csprite.github.io/assets/css/simple.css">
+	<link rel="stylesheet" type="text/css" href="https://csprite.github.io/assets/css/post.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/windows-10.min.css">
+	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/github.min.css"-->
+	<!--link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css"-->
+	<script src="https://csprite.github.io/assets/js/scale.fix.js"></script>
+</head>
+<body>
+
+<div id="MainContainer"><h1 id="building-from-source">Building from source</h1>
+<h3 id="quick-links">Quick links:</h3>
+<ul>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#macos">macOS</a></li>
+</ul>
+<h2 id="windows">Windows</h2>
+<ol>
+<li>install <a href="https://www.msys2.org/">msys2</a></li>
+<li>install required dependencies in msys2 mingw64 shell:</li>
+</ol>
+<pre><code class="hljs language-bash">pacman -S make git mingw-w64-x86_64-clang mingw-w64-x86_64-SDL2 mingw-w64-x86_64-python mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-pillow
+</code></pre>
+<p><strong>Note</strong>: If you want to build for x32 bit system replace the <code>x86_64</code> from above packages with <code>i686</code></p>
+<ol start="3">
+<li>Get The Source Code: <code>git clone https://github.com/pegvin/csprite --recursive</code></li>
+<li>Generate Required Assets: <code>make gen-assets</code></li>
+</ol>
+<p><strong>Note</strong>: in my case i had <code>pillow</code> &amp; <code>numpy</code> installed from above command but python did not found them, in that case i had to manually run each script with <code>python3w</code> command like this:</p>
+<pre><code class="hljs language-bash">python3w.exe tools/create_icons.py
+python3w.exe tools/create_assets.py
+</code></pre>
+<ol start="5">
+<li>Generate RC For Windows: <code>make gen-rc Arch=x86_64</code> (or replace <code>x86_64</code> with <code>i686</code> if your target system is x32)</li>
+<li>Build The Source:<ul>
+<li>Debug: <code>make all</code></li>
+<li>Release: <code>make BUILD_TARGET=release WINDRES_TARGET=pe-x86-64</code> (or replace <code>pe-x86-64</code> with <code>pe-i386</code> if your target system is x32)</li>
+</ul>
+</li>
+</ol>
+<h4 id="notes">Notes</h4>
+<ul>
+<li><code>WINDRES_TARGET</code> isn&#39;t need on x64 machines as it&#39;s default</li>
+<li><code>Arch</code> isn&#39;t need on x64 machines as it&#39;s default</li>
+</ul>
+<h2 id="linux">Linux</h2>
+<ol>
+<li>Install SDL2 On Arch &amp; it&#39;s children you can just install it using pacman: <code>sudo pacman -S sdl2</code> but on debian &amp; it&#39;s children the repositories are older than my grandma so we need to <a href="https://wiki.libsdl.org/SDL2/Installation">build SDL2 from source</a>:</li>
+</ol>
+<pre><code class="hljs language-bash">git <span class="hljs-built_in">clone</span> https://github.com/libsdl-org/SDL
+<span class="hljs-built_in">cd</span> SDL
+<span class="hljs-built_in">mkdir</span> build
+<span class="hljs-built_in">cd</span> build
+../configure
+make
+sudo make install
+</code></pre>
+<ol start="2">
+<li><p>Install Other Dependencies:</p>
+<ul>
+<li>Arch: <code>pacman -S gcc make python3 python-numpy python-pillow</code></li>
+<li>Debian:<ul>
+<li><code>apt install gcc g++ make python3 python3-pip</code></li>
+<li><code>python3 -m pip install --upgrade Pillow</code></li>
+<li><code>python3 -m pip install --upgrade numpy</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Get The Source Code: <code>git clone https://github.com/pegvin/csprite --recursive</code></p>
+</li>
+<li><p>Generate Required Assets: <code>make gen-assets</code></p>
+</li>
+<li><p>Build The Source:</p>
+<ul>
+<li>Debug: <code>make all SDL2_STATIC_LINK=0</code></li>
+<li>Release: <code>make all BUILD_TARGET=release SDL2_STATIC_LINK=0</code></li>
+</ul>
+</li>
+</ol>
+<h1 id="macos">macOS</h1>
+<ol>
+<li>Install deps with homebrew: <code>brew install sdl2 pillow numpy</code></li>
+<li>Get the source code: <code>git clone https://github.com/pegvin/csprite --recursive</code></li>
+<li>Generate Required Assets: <code>make gen-assets</code></li>
+<li>Build The Source:<ul>
+<li>Debug: <code>make all</code></li>
+<li>Release: <code>make all BUILD_TARGET=release</code></li>
+</ul>
+</li>
+</ol>
+</div>
+<footer>
+	<nav>
+		<a style="display: inline-block; text-align: justify;" href="/">Home</a> |
+		<a style="display: inline-block; text-align: justify;" href="/blog/">Blog</a> |
+		<a style="display: inline-block; text-align: justify;" href="/wiki/">Wiki</a> |
+		<a style="display: inline-block; text-align: justify;" href="https://github.com/pegvin/csprite">GitHub</a>
+	</nav>
+</footer>
+
+</body>
+</html>
