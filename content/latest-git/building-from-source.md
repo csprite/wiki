@@ -14,7 +14,7 @@ title: Building from source
 2. install required dependencies in msys2 mingw64 shell:
 
 ```bash
-pacman -S make git mingw-w64-x86_64-clang mingw-w64-x86_64-SDL2 mingw-w64-x86_64-python mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-pillow
+pacman -S make git mingw-w64-x86_64-clang mingw-w64-x86_64-SDL2 mingw-w64-clang-x86_64-zlib mingw-w64-x86_64-python mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-pillow
 ```
 **Note**: If you want to build for x32 bit system replace the `x86_64` from above packages with `i686`
 
@@ -36,6 +36,8 @@ python3w.exe tools/create_assets.py
 #### Notes
 - `WINDRES_TARGET` isn't need on x64 machines as it's default
 - `Arch` isn't need on x64 machines as it's default
+- `SDL2_STATIC_LINK` isn't need as it's 1 by default, set it to 0 if you don't want to link with sdl2 statically
+- `ZLIB_STATIC_LINK` isn't need as it's 1 by default, set it to 0 if you don't want to link with zlib statically
 
 ## Linux
 
