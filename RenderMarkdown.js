@@ -21,7 +21,7 @@ marked.setOptions({
 
 function ParseMarkdown(markdownText) {
 	return marked.parse(
-		markdownText.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/,"") // Remove Funny Characters The Some Editors Add
+		markdownText.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/,"") // Remove Funny Characters That Some Editors Add
 	)
 }
 
@@ -78,10 +78,9 @@ function RenderToDirectory(outputDir, inputDir) {
 <div id="MainContainer">${ParseMarkdown(fileMeta.content)}</div>
 <footer>
 	<nav>
-		<a style="display: inline-block; text-align: justify;" href="/">Home</a> |
-		<a style="display: inline-block; text-align: justify;" href="/blog/">Blog</a> |
-		<a style="display: inline-block; text-align: justify;" href="/wiki/">Wiki</a> |
-		<a style="display: inline-block; text-align: justify;" href="https://github.com/pegvin/csprite">GitHub</a>
+		<a style="display: inline-block; text-align: justify;" href="/">Home</a>|<!--
+		--><a style="display: inline-block; text-align: justify;" href="/wiki/">Wiki</a>|<!--
+		--><a style="display: inline-block; text-align: justify;" href="https://github.com/pegvin/csprite">GitHub</a>
 	</nav>
 </footer>
 
@@ -136,10 +135,9 @@ function RenderToIndexFile(inputFile, outputFile, filesArr) {
 </div>
 <footer>
 	<nav>
-		<a style="display: inline-block; text-align: justify;" href="/">Home</a> |
-		<a style="display: inline-block; text-align: justify;" href="/blog/">Blog</a> |
-		<a style="display: inline-block; text-align: justify;" href="/wiki/">Wiki</a> |
-		<a style="display: inline-block; text-align: justify;" href="https://github.com/pegvin/csprite">GitHub</a>
+		<a style="display: inline-block; text-align: justify;" href="/">Home</a>|<!--
+		--><a style="display: inline-block; text-align: justify;" href="/wiki/">Wiki</a>|<!--
+		--><a style="display: inline-block; text-align: justify;" href="https://github.com/pegvin/csprite">GitHub</a>
 	</nav>
 </footer>
 
